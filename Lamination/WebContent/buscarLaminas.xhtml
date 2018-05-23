@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<style type="text/css">
+body {
+	background-image: url(#{userBean.imagenFondo});
+	background-size: 100%;
+}
+</style>
+	<f:loadBundle basename="beans.mensajes" var="msjs" />
+	<title><h:outputText value="#{msjs.VentanaPrincipal}" /></title>
+</h:head>
+<h:body>
+	<table>
+		<tr>
+			<td><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+
+				</h:graphicImage></td>
+			<td align="right" valign="top" width="100%"><h:form>
+					<p:commandButton value="#{msjs.Salir}" ajax="false"
+						action="#{userBean.cerrarSesion}" />
+				</h:form></td>
+		</tr>
+	</table>
+
+	<table>
+		<tr>
+			<h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.perfil}" ajax="false"  action="#{userBean.prepararPerfil}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Repetidas}" ajax="false" action="#{userBean.laminasRepetidas}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Faltantes}" ajax="false" action="#{userBean.laminasFalatantes}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Buscar laminas" ajax="false"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Agregar noticia" ajax="false" action = "#{newBean.prepararNoticia}"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+		</tr>
+	</table>
+
+	<table>
+
+		<tr>
+			<td align="center"><p:outputLabel
+					style="background: rgba(255,255,255,0.5)"
+					value="Click derecho para ver las opciones" /></td>
+		</tr>
+
+
+		<tr>
+			<td><h:form id="form">
+					<p:dataTable id="faltantes" var="MSheet" paginator="true" rows="10"
+						value="#{sheetBean.missingSheets}"
+						rowKey="#{MSheet.missingSheet.numberSheets}"
+						selection="#{sheetBean.selectedM}" selectionMode="single">
+						<f:facet name="header">
+            Láminas que otros necesitan y tu tienes
+        </f:facet>
+						<p:column headerText="Usuario" filterBy="#{MSheet.user.userName}"
+							sortBy="#{MSheet.user.userName}" filterMatchMode="startsWith">
+							<h:outputText value="#{MSheet.user.userName}" />
+						</p:column>
+						<p:column headerText="Número de la lámina"
+							filterBy="#{MSheet.missingSheet.numberSheets}"
+							sortBy="#{MSheet.missingSheet.numberSheets}"
+							filterMatchMode="startsWith">
+							<h:outputText value="#{MSheet.missingSheet.numberSheets}" />
+						</p:column>
+					</p:dataTable>
+
+					<p:contextMenu for="faltantes">
+						<p:menuitem value="View" update="userDetail" icon="ui-icon-search"
+							oncomplete="PF('userDialog').show()" />
+					</p:contextMenu>
+
+					<p:dialog header="Información del usuario" widgetVar="userDialog"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="userDetail" style="text-align:center;">
+							<p:panelGrid columns="2" columnClasses="label,value">
+								<f:facet name="header">
+									<p:graphicImage value="/Imagenes/Laminas/48-2014.jpg" />
+								</f:facet>
+
+								<h:outputText value="Usuario:" />
+								<h:outputText value="#{sheetBean.selectedM.user.userName}" />
+
+								<h:outputText value="Nombre completo:" />
+								<h:outputText value="#{sheetBean.selectedM.user.fullName}" />
+
+								<h:outputText value="Correo:" />
+								<h:outputText value="#{sheetBean.selectedM.user.emailAddress}" />
+
+								<h:outputText value="Teléfono:" />
+								<h:outputText value="#{sheetBean.selectedM.user.phoneNumber}" />
+
+								<h:outputText value="Lámina:" />
+								<h:outputText
+									value="#{sheetBean.selectedM.missingSheet.numberSheets}" />
+
+
+							</p:panelGrid>
+							<p:commandButton ajax="false" value="Enviar correo"
+								action="#{sheetBean.enviarMensajeMissing}"></p:commandButton>
+
+							<p:commandButton ajax="false" value="Enviar SMS"></p:commandButton>
+						</p:outputPanel>
+					</p:dialog>
+				</h:form></td>
+		</tr>
+
+
+
+
+		<tr>
+			<td><h:form id="form2">
+					<p:dataTable id="repetidas" var="RSheet" paginator="true" rows="10"
+						value="#{sheetBean.repeatedSheets}"
+						rowKey="#{RSheet.repeatedSheet.numberSheets}"
+						selection="#{sheetBean.selectedR}" selectionMode="single">
+						<f:facet name="header">
+            Láminas que otros tienen y tu necesitas
+        </f:facet>
+						<p:column headerText="Usuario">
+							<h:outputText value="#{RSheet.user.userName}" />
+						</p:column>
+						<p:column headerText="Número de la lámina">
+							<h:outputText value="#{RSheet.repeatedSheet.numberSheets}" />
+						</p:column>
+					</p:dataTable>
+
+					<p:contextMenu for="repetidas">
+						<p:menuitem value="View" update="userDetail2"
+							icon="ui-icon-search" oncomplete="PF('userDialog2').show()" />
+					</p:contextMenu>
+
+					<p:dialog header="Información del usuario" widgetVar="userDialog2"
+						modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+						<p:outputPanel id="userDetail2" style="text-align:center;">
+							<p:panelGrid columns="2" columnClasses="label,value">
+								<f:facet name="header">
+									<p:graphicImage value="/Imagenes/Laminas/0-2014.jpg" />
+								</f:facet>
+
+								<h:outputText value="Usuario:" />
+								<h:outputText value="#{sheetBean.selectedR.user.userName}" />
+
+								<h:outputText value="Nombre completo:" />
+								<h:outputText value="#{sheetBean.selectedR.user.fullName}" />
+
+								<h:outputText value="Correo:" />
+								<h:outputText value="#{sheetBean.selectedR.user.emailAddress}" />
+
+								<h:outputText value="Teléfono:" />
+								<h:outputText value="#{sheetBean.selectedR.user.phoneNumber}" />
+
+								<h:outputText value="Lámina:" />
+								<h:outputText
+									value="#{sheetBean.selectedR.repeatedSheet.numberSheets}" />
+
+
+							</p:panelGrid>
+							<p:commandButton ajax="false" value="Enviar correo"
+								action="#{sheetBean.enviarMensajeRepeated}"></p:commandButton>
+
+							<p:commandButton ajax="false" value="Enviar SMS"></p:commandButton>
+						</p:outputPanel>
+					</p:dialog>
+				</h:form></td>
+		</tr>
+
+
+
+	</table>
+</h:body>
+</html>

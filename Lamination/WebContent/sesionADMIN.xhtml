@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+    <style type="text/css"></style>
+    <f:loadBundle basename="beans.mensajes" var="msjs" />
+        <title>
+            <h:outputText value="#{msjs.VentanaPrincipal}"/>
+        </title>
+</h:head>
+<h:body style="background-image: url(../Imagenes/fondo.jpg); background-size:100%" > 
+    <table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+        	<h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Auditoria" ajax="false" action="#{userBean.auditoria}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Gestion de usuarios" ajax="false" action="#{userBean.gestionDeUsuarios}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Parametros" ajax="false" action="parametros"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Noticias" ajax="false" action="agregarNoticiaAdmin"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+            
+        </tr>
+    </table>
+    
+    <table align="center">
+
+
+
+		<tr>
+			<td align="center"><h:form>
+					<p:galleria value="#{newBean.noticias}" var="noticia" panelWidth="500" panelHeight="500" showCaption="true">
+						<p:graphicImage value="/Imagenes/noticia.png" width="500" height="500" alt="#{noticia.largeDescription}" title="#{noticia.shortDescription}"/>
+					</p:galleria>
+				</h:form></td>
+		</tr>
+		
+
+	</table>
+</h:body> 
+</html>

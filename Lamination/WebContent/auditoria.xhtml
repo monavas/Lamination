@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+    <style type="text/css"></style>
+    <f:loadBundle basename="beans.mensajes" var="msjs" />
+        <title>
+            <h:outputText value="#{msjs.VentanaPrincipal}"/>
+        </title>
+</h:head>
+<h:body style="background-image: url(../Imagenes/fondo.jpg); background-size:100%" > 
+    <table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Auditoria" ajax="false"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Gestion de usuarios" ajax="false" action="#{userBean.gestionDeUsuarios}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Parametros" ajax="false" action="parametros"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Noticias"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+        </tr>
+    </table>
+    
+    <table>
+    
+    
+    
+    <tr>
+            <td>
+            <h:form id="form">
+            
+    <p:dataTable var="audit" paginator="true" rows="10" value="#{userBean.auditoria}">
+        <f:facet name="header">
+            
+            <table>
+            <tr>
+            
+           <td><p:commandLink align="right"  ajax="false" action="#{userBean.exportarPDFAudit}">
+            <p:graphicImage align="right" value="/Imagenes/pdf.png" width="30" height="30"></p:graphicImage>
+            </p:commandLink></td>
+            <td><p:outputLabel value="Auditoria"></p:outputLabel> </td>
+            <td> <p:commandLink align="right"  ajax="false" action="#{userBean.exportarExcelAudit}">
+            <p:graphicImage align="right" value="/Imagenes/excel.png" width="30" height="30"></p:graphicImage>
+            </p:commandLink></td>
+            
+            
+            
+            </tr>
+            </table>
+           
+            
+        </f:facet>
+        <p:column headerText="Id del usuario" filterBy="#{audit.userId}" sortBy="#{audit.userId}" filterMatchMode="startsWith">
+            <h:outputText value="#{audit.userId}" />
+        </p:column>
+        <p:column headerText="Nombre de la tabla" filterBy="#{audit.tableName}" sortBy="#{audit.tableName}" filterMatchMode="startsWith">
+            <h:outputText value="#{audit.tableName}" />
+        </p:column>
+        <p:column headerText="Id de la tabla" filterBy="#{audit.tableId}" sortBy="#{audit.tableId}" filterMatchMode="startsWith">
+            <h:outputText value="#{audit.tableId}" />
+        </p:column>
+        <p:column headerText="Fecha" filterBy="#{audit.createDate}" sortBy="#{audit.createDate}" filterMatchMode="startsWith">
+            <h:outputText value="#{audit.createDate}" />
+        </p:column>
+        <p:column headerText="Operación" filterBy="#{audit.operation}" sortBy="#{audit.operation}" filterMatchMode="startsWith">
+            <h:outputText value="#{audit.operation}" />
+        </p:column>
+       <p:column headerText="Ip del usuario" filterBy="#{audit.ip}" sortBy="#{audit.ip}" filterMatchMode="startsWith">
+       <h:outputText value="#{audit.ip}" />
+        </p:column>
+    </p:dataTable> 
+ 
+    
+</h:form>
+            </td>
+        </tr>
+        
+        
+        
+        
+        
+        
+    </table>
+</h:body> 
+</html>

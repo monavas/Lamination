@@ -1,0 +1,103 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+    <style type="text/css"></style>
+    <f:loadBundle basename="beans.mensajes" var="msjs" />
+        <title>
+            <h:outputText value="#{msjs.VentanaPrincipal}"/>
+        </title>
+</h:head>
+<h:body style="background-image: url(../Imagenes/fondo.jpg); background-size:100%" > 
+    <table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Auditoria" ajax="false" action="#{userBean.auditoria}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Gestion de usuarios" ajax="false" action="#{userBean.gestionDeUsuarios}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Parametros" ajax="false"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Noticias"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+        </tr>
+    </table>
+    
+    <table>
+    
+    
+    
+  
+    
+    <tr>
+        <td>
+            <h:form id="form">
+            <p:commandButton value="Agregar parametro" ajax="false" action="#{parameterBean.prepararParametro}"/>
+                <p:dataTable var="parameter" id="parametros" paginator="true" rows="30" value="#{parameterBean.parametros}" rowKey="#{parameter.id}" 
+                selection="#{parameterBean.parametroAModificar}" selectionMode="single">
+                    <f:facet name="header">
+                    Usuarios
+                    </f:facet>
+                    <p:column headerText="Id:" filterBy="#{parameter.id}" sortBy="#{parameter.id}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.id}" />
+                    </p:column>
+                    <p:column headerText="Descripcion del parametro:" filterBy="#{parameter.descriptionParameter}" sortBy="#{parameter.descriptionParameter}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.descriptionParameter}" />
+                    </p:column>
+                    <p:column headerText="Valor numerico:" filterBy="#{parameter.numberValue}" sortBy="#{parameter.numberValue}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.numberValue}" />
+                    </p:column>
+                    <p:column headerText="Codigo de parametro:" filterBy="#{parameter.parameterCode}" sortBy="#{parameter.parameterCode}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.parameterCode}" />
+                    </p:column>
+                    <p:column headerText="Tipo de parametro:" filterBy="#{parameter.parameterType}" sortBy="#{parameter.parameterType}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.parameterType}" />
+                    </p:column>
+                    <p:column headerText="Valor de texto:" filterBy="#{parameter.textValue}" sortBy="#{parameter.textValue}" filterMatchMode="exact">
+                    <h:outputText value="#{parameter.textValue}" />
+                    </p:column>
+                </p:dataTable> 
+            <p:contextMenu for="parametros">
+                <p:menuitem value="Modificar parametro" ajax="false" action="modificarParametro"/>
+            </p:contextMenu>
+            </h:form>
+        </td>
+    </tr>
+        
+        
+        
+        
+        
+        
+    </table>
+</h:body> 
+</html>

@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui" 
+	xmlns:a4j="http://richfaces.org/a4j"
+	xmlns:rich="http://richfaces.org/rich">
+
+<h:head>
+	<h:messages globalOnly="true" style="font-size:40px"></h:messages>
+	<style type="text/css">
+body {
+	background-image: url(#{userBean.imagenFondo});
+	background-size: 100%;
+}
+</style>
+<title>
+            <h:outputText value="Lamination"/>
+        </title>
+</h:head>
+<h:body>
+	<table>
+		<tr>
+			<td><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+
+				</h:graphicImage></td>
+			<td align="right" valign="top" width="100%">
+
+				<table>
+					<tr>
+						<td><h:form>
+								<table style="background: rgba(255, 255, 255, 0.5)">
+									<tr>
+										<td><p:outputLabel value="Usuario" style="font-size:20px" /></td>
+										<td><p:inputText required="true"
+												requiredMessage="Usuario incorrecto" id="user"
+												value="#{userBean.usuarioAIngresar.userName}"
+												style="font-size:20px" size="20">
+												<f:validateLength maximum="8"></f:validateLength>
+											</p:inputText> <p:message for="user"></p:message></td>
+									</tr>
+									<tr>
+										<td><p:outputLabel value="Contraseña"
+												style="font-size:20px" /></td>
+										<td><p:password required="true"
+												requiredMessage="Clave incorrecta" id="clave"
+												value="#{userBean.usuarioAIngresar.password}"
+												style="font-size:20px" size="20">
+												<f:validateLength minimum="6" maximum="8"></f:validateLength>
+											</p:password> <p:message for="clave"></p:message></td>
+									</tr>
+									<tr>
+										<td colspan="2">
+											 <p:captcha label="Captcha" required="true"/>
+										</td>
+									</tr>
+
+									<tr>
+										<td><p:commandButton style="background:#07840c;color:white" value="Iniciar" ajax="false"
+												action="#{userBean.iniciarSesion}" /></td>
+										<td></td>
+									</tr>
+								</table>
+								<p:dialog modal="true" showEffect="slide" style="color:red" widgetVar="inicioSesionIncorrecto">
+									<p:outputLabel value="Usuario o contraseña incorrecta"></p:outputLabel>
+						        </p:dialog>
+						        
+						        <p:dialog modal="true" showEffect="slide" style="color:red" widgetVar="inicioSesionBloqueo">
+									<p:outputLabel value="Usuario bloqueado"></p:outputLabel>
+						        </p:dialog>
+						        
+						        <p:dialog modal="true" showEffect="slide" style="color:red" widgetVar="inicioSesionBloqueoP">
+									<p:outputLabel value="Usuario ha sido bloqueado por exceder el número de intentos"></p:outputLabel>
+						        </p:dialog>
+							</h:form></td>
+					</tr>
+					<tr>
+						<td><h:form>
+								<p:commandButton ajax="false" style="background:#07840c;color:white" value="Registrarse"
+									action="#{userBean.prepararUsuarioAAgregar}" />
+								<p:commandLink ajax="false" value="Olvido su contraseña"
+									action="olvidoContrasenia" />
+							</h:form></td>
+					</tr>
+
+				</table>
+
+
+			</td>
+		</tr>
+	</table>
+	
+	
+	
+
+	<table align="center">
+
+
+
+		<tr>
+			<td align="center"><h:form>
+					<p:galleria value="#{newBean.noticias}" var="noticia" panelWidth="500" panelHeight="500" showCaption="true">
+						<p:graphicImage value="/Imagenes/noticia.png" width="500" height="500" alt="#{noticia.largeDescription}" title="#{noticia.shortDescription}"/>
+					</p:galleria>
+				</h:form></td>
+		</tr>
+		
+
+	</table>
+
+
+</h:body>
+</html>

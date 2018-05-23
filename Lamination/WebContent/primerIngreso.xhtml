@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<style type="text/css">
+    body{
+		background-image: url(#{userBean.imagenFondo});
+		background-size:100%;
+	}
+    </style>
+<h:messages globalOnly="true" style="font-size:40px"></h:messages>
+</h:head> 
+<h:body> 
+	<table >
+    	<tr>
+        	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png"/></td><td align="right" valign = "top" width="100%" >
+        	</td>
+        </tr>
+    </table>
+    <h:form>
+    <table align="center" style="background: rgba(255,255,255,0.5)">
+    <tr>
+    <td>
+    <p:outputLabel value="Contraseña:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:password  id="numerOneId" value="#{userBean.contraseñaNueva}" required="true" requiredMessage="Dato incorrecto" size="60" style="font-size:20px">
+    <f:validateLength minimum="6" maximum="8"></f:validateLength>
+    </p:password>
+    <p:message for="numerOneId"></p:message>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p:outputLabel value="Confirmar contraseña:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:password id="confirmNumerOneId" value="#{userBean.confContra}" required="true" requiredMessage="Dato incorrecto" size="60" style="font-size:20px">
+    <f:validateLength minimum="6" maximum="8"></f:validateLength>
+    </p:password>
+    <p:message for="confirmNumerOneId"></p:message>
+    </td>
+    </tr>
+    
+     <tr>
+    <td colspan="2" align="center">
+    <p:commandButton ajax = "false" value="Cambiar" align="center" action="#{userBean.cambiarContraseniaPrimerIngreso}"/>
+    </td>
+    </tr>
+    </table>
+    <p:dialog modal="true" showEffect="slide" widgetVar="primerAnterior">
+									<p:outputLabel value="La contraseña debe ser diferente a la anterior"></p:outputLabel>
+						        </p:dialog>
+						        <p:dialog modal="true" showEffect="slide" widgetVar="primerDiferente">
+									<p:outputLabel value="Contraseñas diferentes"></p:outputLabel>
+						        </p:dialog>
+    </h:form>
+</h:body> 
+</html>

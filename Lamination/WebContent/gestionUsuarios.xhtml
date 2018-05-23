@@ -1,0 +1,123 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+    <style type="text/css"></style>
+    <f:loadBundle basename="beans.mensajes" var="msjs" />
+        <title>
+            <h:outputText value="#{msjs.VentanaPrincipal}"/>
+        </title>
+</h:head>
+<h:body style="background-image: url(../Imagenes/fondo.jpg); background-size:100%" > 
+    <table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Auditoria" ajax="false" action="#{userBean.auditoria}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Gestion de usuarios" ajax="false"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Parametros" ajax="false" action="parametros"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Noticias"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+        </tr>
+    </table>
+    
+    <table>
+    
+    
+    
+    <tr>
+            <td>
+            <h:form id="form">
+            
+    <p:dataTable var="user" id="usuarios" paginator="true" rows="10" value="#{userBean.usuarios}" rowKey="#{user.id}" 
+    selection="#{userBean.usuarioAModificar}" selectionMode="single">
+    
+        <f:facet name="header">
+            <table>
+            <tr>
+            
+           <td><p:commandLink align="right"  ajax="false" action="#{userBean.exportarPDFUser}">
+            <p:graphicImage align="right" value="/Imagenes/pdf.png" width="30" height="30"></p:graphicImage>
+            </p:commandLink></td>
+            <td><p:outputLabel value="Usuarios"></p:outputLabel> </td>
+            <td> <p:commandLink align="right"  ajax="false" action="#{userBean.exportarExcelUser}">
+            <p:graphicImage align="right" value="/Imagenes/excel.png" width="30" height="30"></p:graphicImage>
+            </p:commandLink></td>
+            
+            
+            
+            </tr>
+            </table>
+        </f:facet>
+        <p:column headerText="Id" filterBy="#{user.id}" sortBy="#{user.id}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.id}" />
+        </p:column>
+        <p:column headerText="Nombre de usuario" filterBy="#{user.userName}" sortBy="#{user.userName}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.userName}" />
+        </p:column>
+        <p:column headerText="Nombre completo" filterBy="#{user.fullName}" sortBy="#{user.fullName}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.fullName}" />
+        </p:column>
+        <p:column headerText="Número telefónico" filterBy="#{user.phoneNumber}" sortBy="#{user.phoneNumber}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.phoneNumber}" />
+        </p:column>
+        <p:column headerText="Correo electrónico" filterBy="#{user.emailAddress}" sortBy="#{user.emailAddress}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.emailAddress}" />
+        </p:column>
+        <p:column headerText="Fecha ultimo cambio de contraseña" filterBy="#{user.dateLastPassword}" sortBy="#{user.dateLastPassword}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.dateLastPassword}" />
+        </p:column>
+        <p:column headerText="Estado" filterBy="#{user.active}" sortBy="#{user.active}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.active}" />
+        </p:column>
+        <p:column headerText="País" filterBy="#{user.pais}" sortBy="#{user.pais}" filterMatchMode="startsWith">
+            <h:outputText value="#{user.pais}" />
+        </p:column>
+    </p:dataTable> 
+  <p:contextMenu for="usuarios">
+        <p:menuitem value="Modificar usuario" ajax="false" action="modificarUsuario"/>
+        <p:menuitem value="Desactivar o activar usuario" ajax="false" action="#{userBean.eliminarUsuario}"/>
+    </p:contextMenu>
+</h:form>
+            </td>
+        </tr>
+        
+        
+        
+        
+        
+        
+    </table>
+</h:body> 
+</html>

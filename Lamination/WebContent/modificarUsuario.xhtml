@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"> 
+
+<h:head>
+<style type="text/css">
+	
+</style>
+<h:messages globalOnly="true" style="font-size:40px"></h:messages>
+</h:head> 
+<h:body style="background-image: url(../Imagenes/fondo.jpg); background-size:100%"> 
+	<table>
+    	<tr>
+    	<td ><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">s/cabeza.png">
+        	
+        	</h:graphicImage></td><td align="right" valign = "top" width="100%" >
+        		<h:form>
+        	    	<p:commandButton value="#{msjs.Salir}" action="#{userBean.cerrarSesion}"/>
+				</h:form>
+        	
+        	</td>
+        </tr>
+    </table>
+    <table>
+        <tr>
+            <h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Auditoria" ajax="false" action="#{userBean.auditoria}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Gestion de usuarios" ajax="false" action="#{userBean.gestionDeUsuarios}"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Parametros" ajax="false" action="parametros"/>
+            				</td>
+            				<td>
+                				<p:commandButton style="width:100%;background:#19d3e8" value="Noticias"/>
+            				</td>
+            			</tr>
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+        </tr>
+    </table>
+    
+    
+    <h:form>
+    <table align="center" style="background: rgba(255,255,255,0.5)">
+    <tr>
+    <td>
+    <p:outputLabel value="Id:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:outputLabel value="#{userBean.usuarioAModificar.id}" size="60" style="font-size:20px">
+    </p:outputLabel>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p:outputLabel value="Usuario:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:outputLabel value="#{userBean.usuarioAModificar.userName}" size="60" style="font-size:20px">
+    </p:outputLabel>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p:outputLabel value="Nombre completo:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:inputText value="#{userBean.usuarioAModificar.fullName}" id="nombrecompl" required="true" requiredMessage="Dato incorrecto" size="60" style="font-size:20px">
+    <f:validateLength maximum="60"></f:validateLength>
+    </p:inputText>
+    <p:message for="nombrecompl"></p:message>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p:outputLabel value="Correo electrónico:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:inputText value="#{userBean.usuarioAModificar.emailAddress}"  id="correo" required="true" requiredMessage="Dato incorrecto" size="60" style="font-size:20px">
+    <f:validateLength maximum="75"></f:validateLength>
+    </p:inputText>
+    <p:message for="correo"></p:message>
+    </td>
+    </tr>
+    <tr>
+    <td>
+    <p:outputLabel value="Número telefónico" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:inputText onkeypress="if(event.which &lt; 48 || event.which &gt; 57) return false;" value="#{userBean.usuarioAModificar.phoneNumber}" id="telef" required="true" requiredMessage="Dato incorrecto" size="60" style="font-size:20px">
+    <f:validateLength maximum="10"></f:validateLength>
+    <f:convertNumber></f:convertNumber>
+    </p:inputText>
+    <p:message for="telef"></p:message>
+    </td>
+    </tr>
+    
+    <tr>
+    <td>
+    <p:outputLabel value="Fecha ultimo cambio de contraseña:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:outputLabel value="#{userBean.usuarioAModificar.dateLastPassword}" size="60" style="font-size:20px">
+    </p:outputLabel>
+    </td>
+    </tr>
+    
+    <tr>
+    <td>
+    <p:outputLabel value="País:" style="font-size:35px"></p:outputLabel>
+    </td>
+    <td>
+    <p:selectOneMenu
+						value="#{userBean.usuarioAModificar.pais}" id="pa" size="60"
+						style="font-size:20px;width:92%">
+						
+						<f:selectItem itemLabel="RUSIA" itemValue="RUSIA" />
+						<f:selectItem itemLabel="ARABIA SAUDITA" itemValue="ARABIA SAUDITA" />
+						<f:selectItem itemLabel="EGIPTO" itemValue="EGIPTO" />
+						<f:selectItem itemLabel="URUGUAY" itemValue="URUGUAY" />
+						<f:selectItem itemLabel="PORTUGAL" itemValue="PORTUGAL" />
+						<f:selectItem itemLabel="ESPAÑA" itemValue="ESPAÑA" />
+						<f:selectItem itemLabel="MARRUECOS" itemValue="MARRUECOS" />
+						<f:selectItem itemLabel="IRAN" itemValue="IRAN" />
+						<f:selectItem itemLabel="FRANCIA" itemValue="FRANCIA" />
+						<f:selectItem itemLabel="AUSTRALIA" itemValue="AUSTRALIA" />
+						<f:selectItem itemLabel="PERU" itemValue="PERU" />
+						<f:selectItem itemLabel="DINAMARCA" itemValue="DINAMARCA" />
+						<f:selectItem itemLabel="ARGENTINA" itemValue="ARGENTINA" />
+						<f:selectItem itemLabel="ISLANDIA" itemValue="ISLANDIA" />
+						<f:selectItem itemLabel="CROACIA" itemValue="CROACIA" />
+						<f:selectItem itemLabel="NIGERIA" itemValue="NIGERIA" />
+						<f:selectItem itemLabel="BRASIL" itemValue="BRASIL" />
+						<f:selectItem itemLabel="SUIZA" itemValue="SUIZA" />
+						<f:selectItem itemLabel="COSTA RICA" itemValue="COSTA RICA" />
+						<f:selectItem itemLabel="SERBIA" itemValue="SERBIA" />
+						<f:selectItem itemLabel="ALEMANIA" itemValue="ALEMANIA" />
+						<f:selectItem itemLabel="MEXICO" itemValue="MEXICO" />
+						<f:selectItem itemLabel="SUECIA" itemValue="SUECIA" />
+						<f:selectItem itemLabel="KOREA" itemValue="KOREA" />
+						<f:selectItem itemLabel="BELGICA" itemValue="BELGICA" />
+						<f:selectItem itemLabel="PANAMA" itemValue="PANAMA" />
+						<f:selectItem itemLabel="TUNEZ" itemValue="TUNEZ" />
+						<f:selectItem itemLabel="INGLATERRA" itemValue="INGLATERRA" />
+						<f:selectItem itemLabel="POLONIA" itemValue="POLONIA" />
+						<f:selectItem itemLabel="SENEGAL" itemValue="SENEGAL" />
+						<f:selectItem itemLabel="COLOMBIA" itemValue="COLOMBIA" />
+						<f:selectItem itemLabel="JAPON" itemValue="JAPON" />
+						<f:selectItem itemLabel="OTRO" itemValue="OTRO" />
+					</p:selectOneMenu>
+    </td>
+    </tr>
+    
+    
+     <tr>
+    <td colspan="2" align="center">
+    <p:commandButton ajax = "false" value="Modificar usuario" align="center" action="#{userBean.actualizarUsuario}"/>
+    </td>
+    </tr>
+    </table>
+    </h:form>
+</h:body> 
+</html>

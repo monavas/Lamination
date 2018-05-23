@@ -1,0 +1,98 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<h:messages globalOnly="true" style="font-size:40px"></h:messages>
+	<style type="text/css">
+    body{
+		background-image: url(#{userBean.imagenFondo});
+		background-size:100%;
+	}
+    </style>
+	<f:loadBundle basename="beans.mensajes" var="msjs" />
+	<title><h:outputText value="#{msjs.VentanaPrincipal}" /></title>
+</h:head>
+<h:body>
+	<table>
+		<tr>
+			<td><h:graphicImage width="180" height="200" value="/Imagenes/logo.png">
+
+				</h:graphicImage></td>
+			<td align="right" valign="top" width="100%"><h:form>
+					<p:commandButton value="#{msjs.Salir}"
+						action="#{userBean.cerrarSesion}" />
+				</h:form></td>
+		</tr>
+	</table>
+	<table>
+		<tr>
+			<h:form style="width:100%">
+            		<table style="width:100%">
+            			<tr>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.perfil}" ajax="false"  action="#{userBean.prepararPerfil}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Repetidas}" ajax="false" action="#{userBean.laminasRepetidas}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="#{msjs.Faltantes}" ajax="false" action="#{userBean.laminasFalatantes}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Buscar laminas" ajax="false" action = "#{userBean.buscarLaminas}"/>
+            				</td>
+            				<td>
+            					<p:commandButton style="width:100%;background:#19d3e8" value="Agregar noticia" ajax="false"/>
+            				</td>
+            			</tr>
+            			
+        
+            		</table>
+                	
+                	
+                	
+                	
+            	</h:form>
+		</tr>
+	</table>
+
+	<h:form>
+		<table align="center" style="background: rgba(255, 255, 255, 0.5)">
+			<tr>
+				<td><p:outputLabel value="Título de la noticia:" style="font-size:35px"></p:outputLabel>
+				</td>
+				<td><p:inputText 
+						id="short" required="true" value="#{newBean.noticiaAAgregar.shortDescription}" requiredMessage="Dato incorrecto"
+						size="45" style="font-size:20px">
+						<f:validateLength maximum="60"></f:validateLength>
+					</p:inputText> <p:message for="short"></p:message></td>
+			</tr>
+			<tr>
+				<td><p:outputLabel value="Descripción del la noticia" style="font-size:35px"></p:outputLabel></td>
+				
+				<td>
+				<p:inputTextarea rows="6" cols="45" 
+						id="large" required="true" value="#{newBean.noticiaAAgregar.largeDescription}" requiredMessage="Dato incorrecto"
+						style="font-size:20px">
+						<f:validateLength maximum="120"></f:validateLength>
+						</p:inputTextarea> <p:message for="large"></p:message></td>
+				
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><p:commandButton ajax="false"
+						value="Agregar Noticia" action="#{newBean.agregarNoticia}" align="center"/></td>
+			</tr>
+		</table>
+								<p:dialog modal="true" showEffect="slide" style="color:red" widgetVar="noticia">
+									<p:outputLabel value="Noticia agregada correctamente"></p:outputLabel>
+						        </p:dialog>
+	</h:form>
+
+</h:body>
+
+
+</html>
